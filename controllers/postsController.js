@@ -1,8 +1,11 @@
+// mi salvo in una costante l'array dei post
+const dataPosts = require('../data/posts');
 
 // index 
 // GET visualizzo tutti gli elementi posts/
 function index (req, res) {
-    res.send('Lista dei post');
+    // res.send('Lista dei post');
+    res.json(dataPosts);
  
 }
 
