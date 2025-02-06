@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/YleniaMighela/express-blog-api-crud/issues"
   },
-  "homepage": "https://github.com/YleniaMighela/express-blog-api-crud#readme"
+  "homepage": "https://github.com/YleniaMighela/express-blog-api-crud#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
