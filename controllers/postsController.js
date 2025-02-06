@@ -6,14 +6,24 @@ const dataPosts = require('../data/posts');
 function index (req, res) {
     // res.send('Lista dei post');
     res.json(dataPosts);
- 
+    
 }
 
 // show
 // GET visualizzo un unico elemento posts/:id
 function show (req, res) {
-    res.send('Dettagli del post con codice numero ' + req.params.id);
-}
+    // res.send('Dettagli del post con codice numero ' + req.params.id);
+    
+    // salviamo in una costante il valore dell'id, forzandolo in un numero
+    const id = parseInt(req.params.id);
+    
+    
+    // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
+    const postId = dataPosts.find( postId => postId.id === id);
+    
+    // restituisco il formato JSON
+    res.json(postId)
+};
 
 
 // store
