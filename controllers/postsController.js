@@ -50,7 +50,30 @@ function modify(req, res) {
 // delete
 //  DELETE rimuovo un elemento posts/:id
 function destroy (req, res) {
-    res.send('Eliminazione del post  con codice numero ' + req.params.id);
+    // res.send('Eliminazione del post  con codice numero ' + req.params.id);
+
+   // salviamo in una costante il valore dell'id, forzandolo in un numero
+   const id = parseInt(req.params.id);
+    
+    
+   // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
+   const postId = dataPosts.find( postId => postId.id === id);
+   
+
+
+
+//    attraverso il metodo splice elimino l'elemento indicato
+    dataPosts.splice(dataPosts.indexOf(postId), 1);
+
+
+    // ritorno della risposta su postman della cancellazione avvenuta
+    res.sendStatus(204);
+
+
+    // controllo sul terminale l'array aggiornata
+    console.log(dataPosts);
+
+
 }
 
 
