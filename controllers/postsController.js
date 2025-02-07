@@ -5,8 +5,20 @@ const dataPosts = require('../data/posts');
 // GET visualizzo tutti gli elementi posts/
 function index (req, res) {
     // res.send('Lista dei post');
-    res.json(dataPosts);
-    
+
+   // inizialmente il posts filtrato sarà uguale a quello dell'array originale
+   let filteredPosts = dataPosts;
+   // successivamente se la richiesta contiene un filtro, filtriamo i post attraverso la proprietà tag
+   if (req.query.tags) {
+       filteredPosts = dataPosts.filter(
+           post => post.tags.includes(req.query.tags)                                         
+        );
+   }    
+   // restituiamo la variabile filteredPosts
+   res.json(filteredPosts);    
+
+
+   
 }
 
 // show
