@@ -56,31 +56,31 @@ function show (req, res) {
 function store (req, res) {
     // console.log(req.body);
     // res.send('Creazione nuovo post');
-
-        // Creo un nuovo id incrementando l'ultimo id presente dell'array
-        const newId = dataPosts[dataPosts.length - 1].id + 1;
-
-        // Creo un nuovo oggetto posts
-        const newPosts = {
-            id: newId,
-            title: req.body.title,
-            content: req.body.content,
-            image: req.body.image,
-            tags: req.body.tags
-        }
-        
-        // Aggiungo il nuovo post all'array
-        dataPosts.push(newPosts);
-
-        // controlliamo
-        console.log(dataPosts);
-        
-          // Restituisco lo status corretto e l'oggetto appena creato
-          res.status(201);
-          res.json(newPosts);
-    }  
-
     
+    // Creo un nuovo id incrementando l'ultimo id presente dell'array
+    const newId = dataPosts[dataPosts.length - 1].id + 1;
+    
+    // Creo un nuovo oggetto posts
+    const newPosts = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+    
+    // Aggiungo il nuovo post all'array
+    dataPosts.push(newPosts);
+    
+    // controlliamo
+    console.log(dataPosts);
+    
+    // Restituisco lo status corretto e l'oggetto appena creato
+    res.status(201);
+    res.json(newPosts);
+}  
+
+
 
 
 
@@ -88,8 +88,8 @@ function store (req, res) {
 // PUT modifico l'intero elemento posts/:id
 function update (req, res) {
     // res.send('Modifica del post con codice numero ' + req.params.id);
-
-  // salviamo in una costante il valore dell'id, forzandolo in un numero
+    
+    // salviamo in una costante il valore dell'id, forzandolo in un numero
     const id = parseInt(req.params.id);
     
     
@@ -109,26 +109,63 @@ function update (req, res) {
         })
     }
     
-// aggiorno i valori 
+    // aggiorno i valori 
     postId.title = req.body.title;
     postId.content =  req.body.content;
     postId.image =  req.body.image;
     postId.tags =  req.body.tags;
-
-
-
-    console.log(dataPosts);
-
-   res.json(postId);
     
-
-
+    
+    // stampo in console
+    console.log(dataPosts);
+    
+    
+    // restituisco in formato JSON
+    res.json(postId);
+    
+    
+    
 }
 
 // modify
 //  PATCH modifico parzialmente l'elemento posts/:id
 function modify(req, res) {
-    res.send('Modifica parziale del post  con codice numero ' + req.params.id);
+    // res.send('Modifica parziale del post  con codice numero ' + req.params.id);
+    
+    
+    // salviamo in una costante il valore dell'id, forzandolo in un numero
+    const id = parseInt(req.params.id);
+    
+    
+    // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
+    const postId = dataPosts.find( postId => postId.id === id);
+    
+    // Facciamo il controllo
+    if (!postId) {
+        
+        // ritorno lo stato di errore 404, non trovato
+        res.status(404);
+        
+        // ritorno un messaggio di errore (formato json)
+        return res.json({
+            error: "Not Found",
+            message: "Pizza non trovata"
+        })
+    }
+    
+    
+        //  modifico il titolo del post trovato
+    if (req.body.title) {
+        postId.title = req.body.title;
+    } else {
+        postId.title = postId.title;
+    }
+    
+    // stampo in console
+    console.log(dataPosts);
+    // restituisco in formato JSON
+    res.json(postId);
+    
 }
 
 
