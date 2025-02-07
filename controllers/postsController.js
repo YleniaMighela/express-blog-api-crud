@@ -87,7 +87,42 @@ function store (req, res) {
 // update
 // PUT modifico l'intero elemento posts/:id
 function update (req, res) {
-    res.send('Modifica del post con codice numero ' + req.params.id);
+    // res.send('Modifica del post con codice numero ' + req.params.id);
+
+  // salviamo in una costante il valore dell'id, forzandolo in un numero
+    const id = parseInt(req.params.id);
+    
+    
+    // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
+    const postId = dataPosts.find( postId => postId.id === id);
+    
+    // Facciamo il controllo
+    if (!postId) {
+        
+        // ritorno lo stato di errore 404, non trovato
+        res.status(404);
+        
+        // ritorno un messaggio di errore (formato json)
+        return res.json({
+            error: "Not Found",
+            message: "Pizza non trovata"
+        })
+    }
+    
+// aggiorno i valori 
+    postId.title = req.body.title;
+    postId.content =  req.body.content;
+    postId.image =  req.body.image;
+    postId.tags =  req.body.tags;
+
+
+
+    console.log(dataPosts);
+
+   res.json(postId);
+    
+
+
 }
 
 // modify
