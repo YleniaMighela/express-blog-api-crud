@@ -32,6 +32,19 @@ function show (req, res) {
     
     // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
     const postId = dataPosts.find( postId => postId.id === id);
+
+      // Facciamo il controllo
+      if (!postId) {
+
+        // ritorno lo stato di errore 404, non trovato
+        res.status(404);
+
+        // ritorno un messaggio di errore (formato json)
+        return res.json({
+            error: "Not Found",
+            message: "Pizza non trovata"
+        })
+    }
     
     // restituisco il formato JSON
     res.json(postId)
@@ -70,9 +83,20 @@ function destroy (req, res) {
     
    // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
    const postId = dataPosts.find( postId => postId.id === id);
+
+      // Facciamo il controllo
+      if (!postId) {
+
+        // ritorno lo stato di errore 404, non trovato
+        res.status(404);
+        
+        // ritorno un messaggio di errore (formato json)
+        return res.json({
+            error: "Not Found",
+            message: "Pizza non trovata"
+        })
+    }
    
-
-
 
 //    attraverso il metodo splice elimino l'elemento indicato
     dataPosts.splice(dataPosts.indexOf(postId), 1);
