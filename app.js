@@ -9,6 +9,9 @@ const postsRouter = require('./routers/postsRouter');
 // definisco la cartella per i file statici
 app.use(express.static('public'));
 
+// registro il body-parser 
+app.use(express.json());
+
 
 // definsco la prima rotta con un semplice messaggio
 app.get('/', (req, res) => {
