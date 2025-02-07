@@ -54,11 +54,34 @@ function show (req, res) {
 // store
 // POST creo un nuovo elemento posts/
 function store (req, res) {
-    console.log(req.body);
-    res.send('Creazione nuovo post');
+    // console.log(req.body);
+    // res.send('Creazione nuovo post');
+
+        // Creo un nuovo id incrementando l'ultimo id presente dell'array
+        const newId = dataPosts[dataPosts.length - 1].id + 1;
+
+        // Creo un nuovo oggetto posts
+        const newPosts = {
+            id: newId,
+            title: req.body.title,
+            content: req.body.content,
+            image: req.body.image,
+            tags: req.body.tags
+        }
+        
+        // Aggiungo il nuovo post all'array
+        dataPosts.push(newPosts);
+
+        // controlliamo
+        console.log(dataPosts);
+        
+          // Restituisco lo status corretto e l'oggetto appena creato
+          res.status(201);
+          res.json(newPosts);
+    }  
 
     
-}
+
 
 
 // update
