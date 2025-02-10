@@ -9,6 +9,9 @@ const postsRouter = require('./routers/postsRouter');
 // importo il middleware di gestione errore del server
 const errorServer = require("./middlewares/errorServer");
 
+// importo il middleware di gestione errore 404 
+const notFound = require("./middlewares/notFound");
+
 
 
 
@@ -36,6 +39,13 @@ app.use("/posts", postsRouter)
 
 // utilizzo middleware di gestione errore server
 app.use(errorServer);
+
+
+
+// utilizzo middleware di gestione errore 404 
+app.use(notFound);
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
