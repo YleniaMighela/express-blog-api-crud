@@ -6,6 +6,10 @@ const dataPosts = require('../data/posts');
 function index (req, res) {
     // res.send('Lista dei post');
     
+    // gestione errore del Server
+    // variabile;
+    
+    
     // inizialmente il posts filtrato sarà uguale a quello dell'array originale
     let filteredPosts = dataPosts;
     // successivamente se la richiesta contiene un filtro, filtriamo i post attraverso la proprietà tag
@@ -154,7 +158,7 @@ function modify(req, res) {
     }
     
     
-        //  modifico il titolo del post trovato
+    //  modifico il titolo del post trovato
     if (req.body.title) {
         postId.title = req.body.title;
     } else {
