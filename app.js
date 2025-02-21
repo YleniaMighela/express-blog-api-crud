@@ -2,6 +2,8 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const cors = require('cors');
+
 
 // salvo i file delle rotte in una costante per importarli
 const postsRouter = require('./routers/postsRouter');
@@ -15,11 +17,14 @@ const notFound = require("./middlewares/notFound");
 
 
 
-
-
-
 // definisco la cartella per i file statici
 app.use(express.static('public'));
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
+
+
 
 // registro il body-parser 
 app.use(express.json());
@@ -47,6 +52,12 @@ app.use(notFound);
 
 
 
+
+
+
+
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
-    });
+});
